@@ -10,9 +10,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "debug": "^2.6.8",
-    "express": "^4.15.3",
-    "ejs": "^2.5.6"
+    "abv-ts": "0.0.1",
+    "abv-node": "0.0.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3"
   },
   "repository": {
     "type": "git",
@@ -20,16 +21,18 @@
   },
   "keywords": [
     "node",
-    "abv",
+    "abvos",
     "websocket",
     "express"
   ],
   "author": {
     "name": "Todor Angelov",
-    "email": "abv@tondy.com",
+    "email": "abv@tondy.org",
     "url": "http://tondy.com"
   },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tondy67/abv-server/issues"
+  },
   "homepage": "https://github.com/tondy67/abv-server#readme"
 }
-

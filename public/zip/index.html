@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zip</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src="js/jszip.min.js"></script>
+<script src="js/FileSaver.min.js"></script>
+
+</head>
+
+<body>
+<noscript>
+	<h3 style="background:red;color:white;text-align:center;">
+		This site works best with <a style="color:white;" href="http://www.enable-javascript.com/" target="_blanc">JavaScript enabled</a>
+	</h3>
+</noscript>
+<!--
+<script>
+var zip = new JSZip();
+zip.file("Hello.txt", "Hello World\n");
+var img = zip.folder("images");
+//img.file("smile.gif", imgData, {base64: true});
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    // see FileSaver.js
+    saveAs(content, "example.zip");
+});
+</script>
+-->
+
+<h3>Choose the local(s) zip file(s)</h3>
+<p class="note">Note : your browser will process the zip file, don't choose a file too big !</p>
+<input type="file" id="file" name="file" multiple /><br />
+<div id="error_block" class="alert alert-danger hidden">
+  You will need a recent browser to use this demo :(
+</div>
+<button id="book" >Book</button>
+<div id="result_block" class="hidden">
+  <h3>Content :</h3>
+  <div id="result"></div>
+</div>
+<script type="text/javascript">
+(function () {
+  if (!window.FileReader || !window.ArrayBuffer) {
+    $("#error_block").removeClass("hidden").addClass("show");
+    return;
+  };
+
+var book = {};
+$("#book").on("click",ttt);
+
+  var $result = $("#result");
+  $("#file").on("change", function(evt) {
+    // remove content
+    $result.html("");
+    // be sure to show the results
+    $("#result_block").removeClass("hidden").addClass("show");
+
+    // Closure to capture the file information.
+    function handleFile(f) {
+      var $title = $("<h4>", {
+        text : f.name
+      });
+      var $fileContent = $("<ul>");
+      $result.append($title);
+      $result.append($fileContent);
+    
+      var dateBefore = new Date();
+      JSZip.loadAsync(f)
+      .then(function(zip) {
+        var dateAfter = new Date();
+        $title.append($("<span>", {
+          text:" (loaded in " + (dateAfter - dateBefore) + "ms)"
+        }));
+
+//var b = zip.file("OPS/info.xhtml").async("string");
+        zip.forEach(function (relativePath, zipEntry) {
+			zip.file(zipEntry.name).async("string").then(function(data){book[zipEntry.name]=data;});
+          $fileContent.append($("<li>", {
+            text : zipEntry.name
+          }));
+        });
+      }, function (e) {
+		  alert(e);
+	 });
+    }
+
+    var files = evt.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+        handleFile(f);
+    }
+  });
+function ttt(){
+	var c = '';
+//	book['OPS/info.xhtml'].then(function(data){console.log(data);});
+	console.log(book['OPS/info.xhtml']);
+};
+
+})();
+</script>
+
+
+</body>
+</html>

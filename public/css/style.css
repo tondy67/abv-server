@@ -40,6 +40,15 @@ body {
     overflow: hidden;
     text-align:right;
 }
+a{
+ color: #007;
+ text-decoration: none;
+}
+
+a:hover {
+ color: #336699;
+}
+
 
 
 

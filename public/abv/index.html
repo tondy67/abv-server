@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link rel="icon" type="image/png" href="/favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <title>Abv agent</title>
+  </head>
+  <body>
+	<div style="color: red;"  id="debug"></div>
+    <div id="messages" style="height: 300px; overflow-x:hidden;overflow-y:visible;"></div>
+
+<form id="msgform">
+	<input id="msg" type="text" />
+    <input type="submit" value="Send" />
+  <br>    <input type="file" name="filename" id="file" size="40">
+
+</form>
+<br /><br />
+<input id="room" type="text" />
+<button id="join" type="button" >Join room1</button>
+<button id="leave" type="button" >Leave room1</button>
+<br />
+<button id="online" type="button" >Online</button>
+<button id="echo" type="button" >Echo</button>
+
+    <script src="./abv-agent.0.0.1.js"></script>
+  </body>
+</html>

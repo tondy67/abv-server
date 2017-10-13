@@ -1,7 +1,7 @@
 {
-  "name": "abv",
+  "name": "abv-server",
   "version": "0.0.1",
-  "description": "Abv server app using Express 4",
+  "description": "Abvos node server app using Express 4",
   "engines": {
     "node": ">=5.9.1"
   },

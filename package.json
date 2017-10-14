@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Abvos node server app using Express 4",
   "engines": {
-    "node": ">=5.9.1"
+    "node": ">=6.11.3"
   },
   "main": "server.js",
   "scripts": {

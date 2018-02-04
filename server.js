@@ -36,7 +36,7 @@ const $ip = aspa.ips()[0];
 const server = aspa.listen(port, ip, (err) => {  
 		if (err) return ts.error(err);
 		ts.info('Node.js: ' + process.version);
-		ts.println(`Abvos node is running on http://${$ip}:${$port}`,ts.BLUE);
+		ts.println(`Abvos node is running on http://${$ip}:${port}`,ts.BLUE);
 	});
 
 ///

@@ -7,9 +7,14 @@
     <title>Abv agent</title>
   </head>
   <body>
+	<noscript>
+		<div style="position:fixed;top:0px;left:0px;width:100%;z-index:10000;background:red;color:white;text-align:center;">
+			This site works best with <a style="color:white;" href="http://www.enable-javascript.com/" target="_blanc">JavaScript enabled</a>
+		</div>
+	</noscript>
 	<div style="color: red;"  id="debug"></div>
     <div id="messages" style="height: 300px; overflow-x:hidden;overflow-y:visible;"></div>
-
+<div id="progress" style="background:red;height:3px;width:0px;"></div>
 <form id="msgform">
 	<input id="msg" type="text" />
     <input type="submit" value="Send" />
@@ -17,13 +22,13 @@
 
 </form>
 <br /><br />
-<input id="room" type="text" />
+<!-- <input id="room" type="text" />
 <button id="join" type="button" >Join room1</button>
 <button id="leave" type="button" >Leave room1</button>
-<br />
+<br /> -->
 <button id="online" type="button" >Online</button>
 <button id="echo" type="button" >Echo</button>
 
-    <script src="./abv-agent.0.0.1.js"></script>
+    <script src="./abv-agent.0.0.2.js"></script>
   </body>
 </html>

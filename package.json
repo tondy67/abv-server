@@ -1,7 +1,7 @@
 {
   "name": "abv-server",
-  "version": "0.0.1",
-  "description": "Abvos node server app using Express 4",
+  "version": "0.0.2",
+  "description": "Abvos node server app",
   "engines": {
     "node": ">=6.11.3"
   },
@@ -10,10 +10,13 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "abv-ts": "tondy67/abv-ts",
-    "abv-node": "tondy67/abv-node",
-    "ejs": "^2.5.6",
-    "express": "^4.15.3"
+    "ws": "^3.0.0",
+    "uws": "^8.14.0",
+    "bufferutil": "^3.0.2",
+    "utf-8-validate": "^3.0.3",
+    "abv-ts": "0.0.2",
+    "abv-node": "0.0.2",
+    "abv-spa": "0.0.2"
   },
   "repository": {
     "type": "git",
@@ -23,11 +26,11 @@
     "node",
     "abvos",
     "websocket",
-    "express"
+    "abv"
   ],
   "author": {
     "name": "Todor Angelov",
-    "email": "abv@tondy.org",
+    "email": "abv@tondy.com",
     "url": "http://tondy.com"
   },
   "license": "MIT",

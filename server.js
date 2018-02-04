@@ -1,4 +1,4 @@
-/* 
+/** 
  * Abvos server
  */
 "use strict";
@@ -8,46 +8,52 @@ const ABV_URL = 'https://tondy67.github.io/abvos/node.html';
 // node --inspect server.js | Open 'about:inspect' in Chrome
 // export DEBUG=abv:*,info / unset DEBUG
 const ts = require('abv-ts')('abv:server');
-const log = console.log.bind(console);
 
-const express = require('express');
-const abv = require('abv-node');
+const pjson = require('./package.json');
+const Aspa = require('abv-spa');
+const AbvNode = require('abv-node');
 
-const app = express();
+const $port = 8080;
+const $host = '0.0.0.0';
+const $root = __dirname + '/public';
 
-const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || abv.port;
-const ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || $port;
+const ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || $host;
 
-app.set('port', port);
+const aspa = new Aspa({root: $root, cache: 3});
+
+aspa.on('/',(req, res) => {
+		res.end('Aspa server: ' + req.url);
+	});
+
+aspa.tpl('/index.html',{
+		title:'Abvos ' + pjson.version,
+		url:ABV_URL
+	});
+
+const $ip = aspa.ips()[0];
+
+const server = aspa.listen($port, $host, (err) => {  
+		if (err) return ts.error(err);
+		ts.info('Node.js: ' + process.version);
+		ts.println(`Abvos node is running on http://${$ip}:${$port}`,ts.BLUE);
+	});
+
 ///
-if (app.get('port') != abv.port){
-//	app.all('*', ensureSecure); 
+let WebSocket = null;
+
+try{
+	WebSocket = require('uws');
+}catch(e){
+	ts.log('Fallback to ws');
+	WebSocket = require('ws');
 }
 
-app.use(express.static(__dirname + '/public'));
+const node = new AbvNode(server,WebSocket);
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/',
-	function(req, res){
-		res.render('pages/index',{ title: 'Abvos',url:ABV_URL});
-});
-
-app.use(function (req, res, next) {
-	res.status(404).send('404 - Not found!');
-});
-
-function ensureSecure(req, res, next){
-  if(req.get('x-forwarded-proto') === 'https') return next();
-  res.redirect('https://' + req.hostname + req.url); 
-}
-
-const server = app.listen(app.get('port'), ip, 511, function(err) {
-	if (err) return console.log(err);
-	ts.info('Node.js: ' + process.version);
-	log('Abvos node is running on http://%s:%s', ip, app.get('port'));
-});
-
-abv.node(server);
 ///
+/*
+const ensureSecure = (req, res) => {
+  if(req.get('x-forwarded-proto') === 'https')
+	res.redirect('https://' + req.hostname + req.url); 
+}; */

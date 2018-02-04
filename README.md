@@ -1,6 +1,8 @@
 # abv-server
 
-Abvos node server using [Express 4](http://expressjs.com/).
+[AbvOS](https://tondy67.github.io/abvos/) node.
+
+![abvos](./abvos.png)
 
 # Live demos
 * [now.eona.net](https://now.eona.net/)

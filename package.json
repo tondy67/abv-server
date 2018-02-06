@@ -15,8 +15,8 @@
     "bufferutil": "^3.0.2",
     "utf-8-validate": "^3.0.3",
     "abv-ts": "0.0.2",
-    "abv-node": "0.0.2",
-    "abv-spa": "0.0.2"
+    "abv-node": "tondy67/abv-node",
+    "abv-spa": "tondy67/abv-spa"
   },
   "repository": {
     "type": "git",

@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/tondy67/abv-server/issues"
   },
-  "homepage": "https://github.com/tondy67/abv-server#readme"
+  "homepage": "https://github.com/tondy67/abv-server#readme",
+  "env": {
+    "PORT": "80"
+  }
 }

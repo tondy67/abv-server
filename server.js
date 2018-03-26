@@ -3,7 +3,7 @@
  */
 "use strict";
 
-const ABV_URL = 'https://tondy67.github.io/abvos/node.html';
+const ABV_URL = 'https://tondy67.github.io/abvos/nodes.html';
 
 // node --inspect server.js | Open 'about:inspect' in Chrome
 // export DEBUG=abv:*,info / unset DEBUG

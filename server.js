@@ -1,5 +1,6 @@
 /** 
  * Abvos server
+ * https://github.com/tondy67/abv-server
  */
 "use strict";
 
@@ -10,7 +11,7 @@ const ABV_URL = 'https://tondy67.github.io/abvos/nodes.html';
 const ts = require('abv-ts')('abv:server');
 
 const pjson = require('./package.json');
-const Aspa = require('abv-spa');
+const aspa = require('abv-spa')();
 const AbvNode = require('abv-node');
 
 const $port = 8080;
@@ -20,36 +21,28 @@ const $root = __dirname + '/public';
 const port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || $port;
 const ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || $host;
 
-const aspa = new Aspa({root: $root, cache: 3});
+aspa.set('root', $root);
+aspa.set('cache',3000);
 
-aspa.on('/',(req, res) => {
-		res.end('Aspa server: ' + req.url);
-	});
+aspa.get('/', res => {
+	res.body = 'Aspa server: ' + req.url;
+	res.send(200);
+});
 
-aspa.tpl('/index.html',{
-		title:'Abvos ' + pjson.version,
-		url:ABV_URL
-	});
+const tpl = {title:'Abvos ' + pjson.version, url:ABV_URL};
+aspa.tpl('/',tpl);
+aspa.tpl('/index.html',tpl);
 
 const $ip = aspa.ips()[0];
 
-const server = aspa.listen(port, ip, (err) => {  
-		if (err) return ts.error(err);
-		ts.info('Node.js: ' + process.version);
-		ts.println(`Abvos node is running on http://${$ip}:${port}`,ts.BLUE);
-	});
+aspa.listen(port, ip, (err) => {  
+	if (err) return ts.error(err);
+	ts.info('Node.js: ' + process.version,'os: ' + process.platform,'arch: '+process.arch);
+	ts.println(`Abvos node is running on http://${$ip}:${port}`,ts.GREEN);
+});
 
 ///
-let WebSocket = null;
-
-try{
-	WebSocket = require('uws');
-}catch(e){
-	ts.log('Fallback to ws');
-	WebSocket = require('ws');
-}
-
-const node = new AbvNode(server,WebSocket);
+const node = new AbvNode(aspa);
 
 ///
 /*

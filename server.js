@@ -29,9 +29,10 @@ aspa.get('/', res => {
 	res.send(200);
 });
 
+/*
 const tpl = {title:'Abvos ' + pjson.version, url:ABV_URL};
 aspa.tpl('/',tpl);
-aspa.tpl('/index.html',tpl);
+aspa.tpl('/index.html',tpl); */
 
 const $ip = aspa.ips()[0];
 
